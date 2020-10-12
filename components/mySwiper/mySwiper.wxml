@@ -1,0 +1,22 @@
+<swiper 
+   class="swiper_container"
+   autoplay
+   indicator-dots
+   indicator-active-color="white"
+   circular
+   easing-function="easeInOutCubic"
+>
+  <swiper-item
+    wx:for="{{ imgUrl }}"
+    wx:key="item"
+  >
+    <image 
+      src="{{ item }}"
+      mode="{{ mode }}"
+      alt="图片"
+      show-menu-by-longpress="true"
+      data-index="{{ index }}"
+      catchtap="scanImg"
+    />
+  </swiper-item>
+</swiper>

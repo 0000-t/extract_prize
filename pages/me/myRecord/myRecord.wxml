@@ -1,0 +1,13 @@
+<!--miniprogram/pages/me/myRecord/myRecord.wxml-->
+<view class="emppty"></view>
+<block wx:for="{{Info}}">
+<view class="container">
+	<text style="color:red;padding-right:20rpx">时间:</text>
+	<text>{{item.createTime}}</text>
+	<text style="padding-left:20rpx;color:red">奖品：</text>
+	<text>{{item.prize}}</text>
+</view>
+</block>
+<view class="loading">
+	<image hidden="{{end}}" src='/images/loading.gif'></image>{{bottomText}}
+</view>

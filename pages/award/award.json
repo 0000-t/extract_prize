@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "myAward": "../../components/_zhuanpan/_zhuanpan",
+    "mySwiper": "../../components/mySwiper/mySwiper",
+    "myDialog": "../../components/dialog/dialog"
+  },
+  "navigationBarBackgroundColor": "#4524B3",
+  "enablePullDownRefresh": true
+}

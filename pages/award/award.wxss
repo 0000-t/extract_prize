@@ -1,0 +1,155 @@
+.container {
+  background: -webkit-linear-gradient(top, #4524B3, #DC34EB);
+  padding-bottom: 40rpx;
+}
+
+.swiper_container {
+  height: 300rpx;
+  padding: 20px 10px;
+  /* background-color: white; */
+}
+
+.swiper_container image {
+  width: 100%;
+  /* height: 400rpx; */
+  height: 100%;
+  border-radius: 8rpx;
+}
+
+.award_title {
+  width: 100%;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  text-align: center;
+  /* background-color: white; */
+}
+
+.compass {
+  width: 100%;
+  padding: 40rpx 0 60rpx;
+  /* background-color: white; */
+  text-align: center;
+}
+
+.compass_award_title {
+  margin-bottom: 40rpx;
+}
+
+.compass_award_title>text {
+  font-size: initial;
+}
+
+.compass_award_num {
+  margin-top: 40rpx;
+  /* color: red; */
+}
+
+.compass_award_num .share {
+  width: 70%;
+  font-weight: normal;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  color: red;
+  /* background-color: white; */
+}
+
+.compass_award_num .start {
+  width: 40%;
+  font-weight: normal;
+  font-size: 40rpx;
+  margin: 30rpx auto;
+  color: red;
+  font-style: italic;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.footer {
+  margin: 20rpx 20rpx 0px;
+  padding: 12rpx 20rpx 20rpx;
+  border: 1px solid #985D3D;
+  border-radius: 10rpx;
+  background-color: white;
+  font-size: 28rpx;
+}
+
+.footer .content {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin: 10rpx 0;
+}
+
+.footer .content .title {
+  width: 80%;
+  text-align: left;
+}
+
+.footer .content .count {
+  width: 20%;
+  text-align: right;
+}
+
+.footer_title {
+  width: 50%;
+  background-color: #FFF3E5;
+  display: flex;
+  align-items: center;
+  margin: 20rpx auto 0px;
+  border-radius: 14rpx;
+}
+
+.strikethrough {
+  text-decoration:line-through;
+  color: #999;
+}
+
+.footer_title>view {
+  width: 100%;
+  padding: 6rpx 8rpx;
+  text-align: center;
+  margin: 8rpx;
+  font-size: 28rpx;
+  text-align: center;
+  color: #A66448;
+  font-weight: bold;
+}
+
+.footer_title .check {
+  padding: 16rpx 0;
+  background-color: #FDDDA2;
+  border-radius: 12rpx;
+  color: #985D3D;
+  font-weight: bold;
+}
+
+.hint {
+  text-align: center;
+  margin-top: 40rpx;
+  font-size: 22rpx;
+}
+
+/* .prize_detail {
+  width: 100%;
+}
+
+.prize_detail .one {
+  width: 50%;
+  display: inline-block;
+  margin: 10rpx auto;
+}
+
+.prize_detail .one image {
+  width: 300rpx;
+  height: 200rpx;
+  margin: 0;
+  padding: 0;
+  border-radius: 10rpx;
+}
+
+.prize_detail .one .count {
+  font-size: 24rpx;
+} */
+
+
+

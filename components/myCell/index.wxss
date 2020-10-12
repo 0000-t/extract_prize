@@ -1,0 +1,26 @@
+.cell{
+  padding: 26rpx 40rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1px;
+  /* border-bottom: 1px solid #f2f2f2; */
+}
+
+.cell:active{
+  background-color: #ddd;
+}
+
+.cell_icon{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.btn-arrow{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 0px;
+}

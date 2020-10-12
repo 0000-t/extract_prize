@@ -1,0 +1,36 @@
+<view class="background">
+	<view class="wrapper">
+		<view class="block">
+			<view 
+				class="title"
+			>
+				{{ title }}
+			</view>
+			<view 
+				class="content"
+			>
+				{{ content }}
+			</view>
+			<image 
+				class="img"
+				wx:if="{{ src }}"
+				mode="widthFix"
+				src="{{ src }}"
+			></image>
+			<view class="btn">
+				<view 
+					class="btn_cancel"
+					catchtap="btnCancel"
+				>
+					关闭
+				</view>
+				<view 
+					class="btn_submit"
+					catchtap="btnSubmit"
+				>
+					领取
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

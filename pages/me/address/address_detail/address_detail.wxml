@@ -1,0 +1,18 @@
+<!--miniprogram/pages/me/address/address_detail/address_detail.wxml-->
+<view class="box">
+    <view class='info_box' wx:for="{{infoList}}" wx:key="">
+    <view class='title'>{{item.title}}</view>
+    <input class="info" 
+                id="{{item.id}}"
+                maxlength='{{item.max}}' 
+                type='{{item.type}}'
+                placeholder="{{item.value ? '' : '未填写'}}"
+                value='{{item.value}}' 
+                disabled="{{inputD}}"
+                bindfocus="bindfocus"
+                bindinput='changeInfo'></input>
+  </view> 
+</view>
+
+<view  class='btn' bindtap="complie">{{bindText}}</view>
+

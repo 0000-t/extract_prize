@@ -1,0 +1,33 @@
+<!--miniprogram/pages/me/myInfo/myInfo.wxml-->
+<block class="empty"></block>
+
+<view class="inner-view">
+	<text class="text">微信名</text>
+	<!-- <text class="text2">{{user.user_id}}</text> -->
+	<text class="text2">{{user.nickName}}</text>
+</view>
+
+<view class="inner-view">
+	<text class="text">性别</text>
+	<!-- <text class="text2">{{user.user_id}}</text> -->
+	<text class="text2">{{user?user.gender == 1?"男":"女" : ""}}</text>
+</view>
+
+<view class="inner-view">
+	<text class="text">省份</text>
+	<!-- <text class="text2">{{user.user_id}}</text> -->
+	<text class="text2">{{user.province}}</text>
+</view>
+
+<view class="inner-view">
+	<text class="text">城市</text>
+	<!-- <text class="text2">{{user.user_id}}</text> -->
+	<text class="text2">{{user.city}}</text>
+</view>
+
+<navigator url="../address/address">
+	<view class="inner-view">
+		<text class="text">我的地址</text>
+		<text class="text2"></text>
+	</view>
+</navigator>

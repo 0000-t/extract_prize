@@ -1,0 +1,30 @@
+<view class="container">
+	<view class="header">
+		<image src="{{ avatarUrl }}" class="header_avatar"></image>
+		<view class="header_title">
+			<button class="header_btn_login" open-type="getUserInfo" bindgetuserinfo="getUserInfoByBtn" wx:if="{{ controller }}">
+				登录
+			</button>
+			<view wx:else>
+				<view class="name">{{ name }}</view>
+				<!-- <view class="ID">ID: 123456</view> -->
+			</view>
+		</view>
+	</view>
+
+	<view class="section">
+		<myCell icon="/images/price.png" title="我的奖品" url="/pages/account/account" />
+		<myCell icon="/images/my-info.png" title="我的信息" url="/pages/me/myInfo/myInfo" />
+		<myCell icon="/images/log.png" title="我的记录" url="/pages/me/myRecord/myRecord" />
+		<myCell icon="/images/address.png" title="我的地址" url="/pages/me/address/address" />
+	
+		<view wx:if ="{{exit}}" class="cell" bindtap="exitToLogin">
+			<image class="cell_icon" src="/images/exit.png"></image>
+			<text class="cell_title">退出登陆</text>
+			<image 
+				class="btn-arrow" 
+				src="../../images/click.png"
+			></image>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,59 @@
+/* miniprogram/pages/me/address/address_detail/address_detail.wxss */
+.box {
+  border-top: 1px solid #f0f0f0;
+  padding: 0 40rpx;
+}
+
+/* 信息栏盒子 */
+
+.info_box {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 25rpx 0;
+  font-size: 34rpx;
+}
+
+/* 标题 */
+
+.title {
+  width: 250rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  letter-spacing: 3rpx;
+}
+
+/* 信息 */
+
+.info {
+  width: 400rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: right;
+  color: #9b9b9b;
+}
+
+/* 查看 */
+
+.check {
+  display: flex;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #3869d4;
+}
+
+.btn {
+  border-radius: 50rpx;
+  background-color: #1296db;
+  left: 0;
+  right: 0;
+  margin: auto;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: white;
+  width: 650rpx;
+  text-align: center;
+  font-size: 36rpx;
+  position: fixed;
+  bottom: 30rpx;
+}

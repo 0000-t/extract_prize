@@ -1,0 +1,22 @@
+<block wx:for="{{Info}}" wx:for-item="item" wx:key="item">
+
+	<view class="container">
+		<!-- <view>
+        <image src="/images/house.png" class="image-style"></image>
+      </view> -->
+
+		<view>
+			<view class="">
+				<!-- 姓名 手机号 -->
+				<text>{{item.name}}</text>
+				<text style="margin-left:15rpx; font-size:26rpx;color:#9d9d9d">{{item.phone}}</text>
+			</view>
+			<text>{{item.address}}</text>
+		</view>
+		<view bindtap="delete" data-id="{{item.id}}" class="border-style">
+			<text style="color: red">删除</text>
+		</view>
+	</view>
+</block>
+
+<view class='btn' bindtap='complie'>添加个人地址</view>

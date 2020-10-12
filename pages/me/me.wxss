@@ -1,0 +1,70 @@
+page {
+  background-color: #f3f3f3;
+}
+
+.header {
+  margin: 0;
+  padding: 50rpx 40rpx;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.header_avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 100%;
+}
+
+.header_title {
+  margin-left: 40rpx;
+}
+
+.header_title .ID {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.header_btn_login {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  display: inline;
+  text-align: left;
+  font-weight: normal;
+  background-color: transparent;
+  font-size: 32rpx;
+}
+
+.section {
+  margin: 20rpx 0 0;
+  /* background-color: white; */
+}
+
+.cell{
+  padding: 26rpx 40rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1px;
+  margin-top: 20rpx;
+}
+
+.cell:active{
+  background-color: #ddd;
+}
+
+.cell_icon{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.btn-arrow{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 20rpx;
+}

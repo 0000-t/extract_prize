@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/award/award",
+    "pages/me/me",
+    "pages/account/account",
+    "pages/advertise/advertise",
+    "pages/me/myInfo/myInfo",
+    "pages/me/myRecord/myRecord",
+    "pages/me/address/address",
+    "pages/me/address/address_detail/address_detail"
+  ],
+  "tabBar": {
+    "selectedColor": "#34A5E0",
+    "list": [
+      {
+        "pagePath": "pages/award/award",
+        "text": "抽奖",
+        "iconPath":"./images/unaward.png",
+        "selectedIconPath":"./images/award.png"
+      },{
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath":"./images/unme.png",
+        "selectedIconPath":"./images/me.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#f2f2f2",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

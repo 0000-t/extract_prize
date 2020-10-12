@@ -1,0 +1,49 @@
+<!-- <view class="award_title">
+   <text>这是一个抽奖活动</text>
+</view> -->
+<view class="container">
+   <mySwiper 
+      imgUrl="{{ imgUrl }}"
+   >
+   </mySwiper>
+
+   <view class="compass">
+      <myAward
+         awardsConfig="{{ awards }}"
+         num="{{ award_num }}"
+         prohibit="{{ prohibit }}"
+         bind:myAwards="click" 
+      ></myAward>
+      <view class="compass_award_num">
+         <!-- <button class="start">start</button> -->
+         <text>抽奖次数：</text>
+         <text>{{ award_num }}</text>
+      </view>
+   </view>
+
+   <!-- <view class="footer_title">
+      <view>奖品状态</view>
+   </view>
+
+   <view class="footer">
+      <view 
+         class="content"
+         wx:for="{{awards}}"
+         wx:key="item"
+      > 
+         <view class="title {{ item.percentage == 0 && 'strikethrough'}}">{{ item.prize }}</view>
+         <view class="count">{{ item.percentage > 0 ? '正常' : '失效' }}</view>
+      </view>
+   </view> -->
+
+   <myDialog 
+      wx:if="{{ showDialog }}"
+      content="{{ myAward.prize }}"
+      src="{{ myAward.url }}"
+      bind:closeDialog="closeDialog"
+      bind:getAward="getAward"
+   ></myDialog>
+
+   <view class="hint">*本次活动最终解释权归主办方所有</view>
+</view>
+

@@ -1,0 +1,6 @@
+{
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "onReachBottomDistance": 50,
+  "usingComponents": {}
+}

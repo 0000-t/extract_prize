@@ -1,0 +1,13 @@
+<view class="cell" catchtap="Click">
+	<image 
+			class="cell_icon" 
+			src="{{ icon }}"
+	></image>
+
+	<text class="cell_title">{{ title }}</text>
+	
+	<image 
+			class="cell_icon btn-arrow" 
+			src="../../images/click.png"
+	></image>
+</view>
