@@ -213,11 +213,12 @@ Component({
 
             //开启概率 percentage这属性必须要传个ture
             if (that.data.percentage) {
-               r = that._openpercentage();
+               r = +that._openpercentage();
+               console.log(r)
             }
          }
 
-         if (typeof (r) != 'number') {
+         if (r <= 0 && r != r) {
             console.log('抽奖概率为零了')
             return void wx.showToast({
                title: '抽奖活动暂停，请稍后再试',

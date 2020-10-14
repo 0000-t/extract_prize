@@ -9,7 +9,7 @@
 <swiper vertical duration="200" bindchange="slide" style="height:{{ screenHeight }}px; width:100%;background:#000">
   <block wx:for="{{ videoData }}" wx:key="id">
     <swiper-item style="height:100%; width:100%">
-      <video wx:if="{{ index == changeIndex }}" style="height:100%; width:100%" src="{{ item.url }}" autoplay="true"  controls="{{ false }}"  enable-play-gesture="true" show-fullscreen-btn="{{ false }}" bindended="addAwardCount" />
+      <video wx:if="{{ index == changeIndex }}" style="height:100%; width:100%" src="{{ item.url }}" autoplay="true"  controls="{{ false }}"  enable-play-gesture="{{ fasle }}" enable-progress-gesture="{{ fasle }}" show-fullscreen-btn="{{ false }}" bindended="addAwardCount" />
     </swiper-item>
   </block>
 </swiper>

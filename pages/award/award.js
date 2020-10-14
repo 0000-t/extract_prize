@@ -169,6 +169,7 @@ Page({
     } else {
       getApp().getUserOpenInfo()
         .then(res => {
+          getApp().globalData.openid = res.data.openId
           openid = res.data.openId;
           console.log(getApp().globalData.openid)
           this.init()

@@ -2,7 +2,7 @@
   "pages": [
     "pages/award/award",
     "pages/me/me",
-    "pages/account/account",
+    "pages/prize/prize",
     "pages/advertise/advertise",
     "pages/me/myInfo/myInfo",
     "pages/me/myRecord/myRecord",
@@ -15,13 +15,14 @@
       {
         "pagePath": "pages/award/award",
         "text": "抽奖",
-        "iconPath":"./images/unaward.png",
-        "selectedIconPath":"./images/award.png"
-      },{
+        "iconPath": "./images/unaward.png",
+        "selectedIconPath": "./images/award.png"
+      },
+      {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath":"./images/unme.png",
-        "selectedIconPath":"./images/me.png"
+        "iconPath": "./images/unme.png",
+        "selectedIconPath": "./images/me.png"
       }
     ]
   },

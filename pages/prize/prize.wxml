@@ -1,9 +1,19 @@
-<view class="text-style">
+<!-- <view class="text-style">
 	-----红包-----
+</view> -->
+
+<view class="cash">
+	<view class="cash_content">
+		<view class="cash_title">可提现余额</view>
+		<view class="cash_num">￥10</view>
+	</view>
+	<view class="cash_btn" catchtap="applyOfCash">提现</view>
 </view>
+
+
 <!-- content -->
-<block wx:for="{{Info}}">
-	<block wx:if="{{item.type == '红包'}}">
+<!-- <block wx:for="{{Info}}" wx:key="item">
+	<block wx:if="{{item.priceType == '红包'}}">
 		<view class="container">
 			<view class="stangle-style flex-style stangel">
 				<view class="flex-style stangel">
@@ -11,30 +21,33 @@
 					<view style="font-size:40rpx;color:red">{{item.count}}</view>
 				</view>
 			</view>
-			<view class="stangle-style-right column-flex-style">
-				<view class="flex-style right padding-rows">
-					<text style="color:rgb(180, 60, 60); margin-right:22rpx">名字:</text>
-					<text>{{item.name}}</text>
+			<view class="stangle-style-right column-flex-style ticket">
+				<view class="ticket_content">
+					<view class="padding-rows">
+						<text style="color:rgb(180, 60, 60); margin-right:22rpx">名字:</text>
+						<text>{{item.name}}</text>
+					</view>
+					<view class="padding-rows">
+						<text style="color:rgb(180, 60, 60); margin-right:22rpx">数量:</text>
+						<text>1</text>
+					</view>
+					<view class="padding-rows">
+						<text style="color:rgb(180, 60, 60); margin-right:22rpx">类型:</text>
+						<text>现金券</text>
+					</view>
 				</view>
-				<view class="flex-style right padding-rows">
-					<text style="color:rgb(180, 60, 60); margin-right:22rpx">数量:</text>
-					<text>1</text>
-				</view>
-				<view class="flex-style right padding-rows">
-					<text style="color:rgb(180, 60, 60); margin-right:22rpx">类型:</text>
-					<text>现金券</text>
-				</view>
+				<view class="ticket_btn" catchtap="clickTicket">券码</view>
 			</view>
 		</view>
 	</block>
-</block>
+</block> -->
 
 
 <view class="text-style">
 	-----券码-----
 </view>
 <!-- content -->
-<block wx:for="{{Info}}">
+<!-- <block wx:for="{{Info}}" wx:key="item">
 	<block wx:if="{{item.type == '券码'}}">
 		<view class="container">
 			<view class="stangle-style flex-style stangel">
@@ -59,15 +72,15 @@
 			</view>
 		</view>
 	</block>
-</block>
+</block> -->
 
 
 <view class="text-style">
 	-----商品-----
 </view>
 <!-- content -->
-<block wx:for="{{Info}}">
-	<block wx:if="{{item.type == '商品'}}">
+<block wx:for="{{Info}}" wx:key="item">
+	<block wx:if="{{item.priceType == '实物'}}">
 		<view class="container">
 			<view class="stangle-style flex-style stangel">
 				<view class="flex-style stangel">
@@ -78,7 +91,7 @@
 			<view class="stangle-style-right column-flex-style">
 				<view class="flex-style right padding-rows">
 					<text style="color:rgb(180, 60, 60); margin-right:22rpx">名字:</text>
-					<text>{{item.name}}</text>
+					<text>{{ item.priceName }}</text>
 				</view>
 				<view class="flex-style right padding-rows">
 					<text style="color:rgb(180, 60, 60); margin-right:22rpx">数量:</text>
@@ -86,7 +99,11 @@
 				</view>
 				<view class="flex-style right padding-rows">
 					<text style="color:rgb(180, 60, 60); margin-right:22rpx">类型:</text>
-					<text>商品券</text>
+					<text>{{ item.priceType }}</text>
+				</view>
+				<view class="flex-style right padding-rows">
+					<text style="color:rgb(180, 60, 60); margin-right:22rpx">状态:</text>
+					<text>{{ item.status != 0 ? (item.status == 1 ? '已领取' : '已过期') : '正常' }}</text>
 				</view>
 			</view>
 		</view>

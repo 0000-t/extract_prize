@@ -5,6 +5,7 @@ App({
     this.getUserAuthorize()
     this.getUserOpenInfo()
       .then(res => {
+        // console.log(res)
         this.globalData.openid = res.data.openId
       })
       .catch(err => {

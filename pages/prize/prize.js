@@ -28,7 +28,15 @@ Page({
     type: "",
     end: true,
     bottomText: "正在加载下一页",
-    Info:[],
+    Info: [],
+  },
+
+  clickTicket(e) {
+    let src = e.currentTarget.dataset.src;
+    console.log('展示券码')
+    // wx.previewImage({
+    //   urls: [src],
+    // })
   },
 
   setElemHeight() {
@@ -40,19 +48,44 @@ Page({
       },
     })
   },
+
   TabChanges(e) {
     this.setData({
       type: e.detail.name
     })
   },
+
+  /**
+   * 申请提现
+   */
+  applyOfCash() {
+    wx.showLoading({
+      title: '提现中, 请稍等',
+    })
+    getPriceInfo.applyOfCash()
+      .then(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '提现成功'
+        })
+      })
+      .catch(err => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '提现失败，请稍后再试',
+        })
+      })
+
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     if (!wx.getStorageSync('userInfo')) {
       wx.navigateBack({
-        delta:1,
-        complete :res => {
+        delta: 1,
+        complete: res => {
           wx.showToast({
             title: '请先登陆,暂无数据',
             icon: 'none',
@@ -60,11 +93,11 @@ Page({
           })
         }
       })
-      
-    }else {
+
+    } else {
       this.setElemHeight();
       getPriceInfo.getMyPrice().then(res => {
-        this.setData({Info:res.data})
+        this.setData({ Info: res.data })
         console.log(res)
       }).catch(err => {
         console.error("失败");
