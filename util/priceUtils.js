@@ -1,5 +1,3 @@
-let openid = getApp().globalData.openid;
-
 /**
  * 
  * @description 与服务器连接的js文件，与奖品相关的东西
@@ -19,7 +17,7 @@ function getPriceInfo(page, rows) {
       url: 'http://47.94.135.125:6081/luckly/raffle/queryByUser',
       method: "GET",
       data: {
-        "userId": openid || 'oZuwZ49HHam4mzSGfzaocTLMHjh4',
+        "userId": getApp().globalData.openid,
         "page": page,
         "rows": rows
       },
@@ -41,7 +39,7 @@ function getMyPrice() {
       url: 'http://47.94.135.125:6081/luckly/prize/getPrizeByOpenId',
       method: "GET",
       data: {
-        "opendId": openid || 'oZuwZ49HHam4mzSGfzaocTLMHjh4',
+        "opendId": getApp().globalData.openid
       },
       dataType: "json",
       // header:{},
@@ -54,10 +52,18 @@ function getMyPrice() {
 /**
  * 提现
  */
-function applyOfCash() {
+function applyOfCash(money) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: '',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      url: 'http://47.94.135.125:6081/luckly//wx/transfer',
+      method: 'POST',
+      data: {
+        openId: getApp().globalData.openid,
+        money
+      },
       success: resolve,
       fail: reject
     })
@@ -70,16 +76,16 @@ function applyOfCash() {
 function getAcount() {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: '',
+      url: 'http://47.94.135.125:6081/luckly/user/' + getApp().globalData.openid,
       success: resolve,
       fail: reject
     })
   })
 }
 
-module.exports = { 
+module.exports = {
   getPriceInfo,
   getMyPrice,
-  applyOfCash, 
+  applyOfCash,
   getAcount,
 }

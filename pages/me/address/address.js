@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    Info: []
+    configuerInfo: "添加个人地址",
+    makesure: false,
+    item:0
   },
 
   /**
@@ -26,6 +28,13 @@ Page({
         }
       })
 
+    } else {
+      if (options.restart) {
+        this.setData({
+          makesure: true,
+          configuerInfo: "确认"
+        })
+      }
     }
   },
 
@@ -54,12 +63,32 @@ Page({
           }).catch(err => wx.hideLoading())
       }
     })
-  },
 
-  complie(e) {
-    wx.navigateTo({
-      url: '../address/address_detail/address_detail',
+  },
+  radioChange(e){
+    this.setData({
+      item:e.detail.value
     })
+  },
+  complie(e) {
+    if (this.data.makesure) {
+      let Info = this.data.Info
+      let info = Info[this.data.item];
+      console.log(Info)
+      let pages = getCurrentPages();
+      let prePage = pages[pages.length -2];
+      prePage.setData({
+        //把地址信息传到上个页面
+        address:info,
+      })
+      wx.navigateBack({
+        delta:1
+      })
+    } else {
+      wx.navigateTo({
+        url: '../address/address_detail/address_detail',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -78,6 +107,7 @@ Page({
     address.ShowAddress()
       .then(res => {
         wx.hideLoading()
+        console.log(res);
         this.setData({
           Info: res.data
         })

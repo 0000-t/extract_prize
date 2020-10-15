@@ -51,6 +51,18 @@ page {
   justify-content: center;
 }
 
+
+
+.stangelling {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-style-change {
+  margin-right: 50rpx;
+}
+
+
 .right {
   align-items: center;
   justify-content: flex-start;

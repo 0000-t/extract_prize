@@ -1,0 +1,24 @@
+<view class="background">
+	<view class="wrapper">
+		<view class="block">
+			<view class="title"	>
+				提现
+			</view>
+			<view class="content"	>
+				<input type="number" bindinput="inputContent" placeholder="{{ placeholder }}"></input>
+			</view>
+			<view class="btn">
+				<view class="btn_cancel"
+					    catchtap="btnCancel"
+				>
+					取消
+				</view>
+				<view class="btn_submit"
+					    catchtap="btnSubmit"
+				>
+					确定
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

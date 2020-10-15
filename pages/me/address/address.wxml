@@ -1,22 +1,33 @@
-<block wx:for="{{Info}}" wx:for-item="item" wx:key="item">
-
+<block wx:if="{{Info}}" wx:for="{{Info}}" wx:for-item="item" wx:key="item">
 	<view class="container">
-		<!-- <view>
+		<radio-group bindchange="radioChange">
+			<!-- <view>
         <image src="/images/house.png" class="image-style"></image>
       </view> -->
 
-		<view>
-			<view class="">
-				<!-- 姓名 手机号 -->
-				<text>{{item.name}}</text>
-				<text style="margin-left:15rpx; font-size:26rpx;color:#9d9d9d">{{item.phone}}</text>
+			<view>
+				<view class="">
+					<!-- 姓名 手机号 -->
+					<text>{{item.name}}</text>
+					<text style="margin-left:15rpx; font-size:26rpx;color:#9d9d9d">{{item.phone}}</text>
+				</view>
+				<text>{{item.address}}</text>
 			</view>
-			<text>{{item.address}}</text>
-		</view>
-		<view bindtap="delete" data-id="{{item.id}}" class="border-style">
-			<text style="color: red">删除</text>
-		</view>
+			<view wx:if="{{!makesure}}" bindtap="delete" data-id="{{item.id}}" class="border-style">
+				<text style="color: red">删除</text>
+			</view>
+			<view>
+				<radio wx:if="{{makesure}}" value="{{item.id}}"></radio>
+			</view>
+		</radio-group>
 	</view>
 </block>
 
-<view class='btn' bindtap='complie'>添加个人地址</view>
+<view wx:if="{{!Info}}">
+	<view style="display:flex;flex-direction:column;align-items:center;margin-top: 100rpx;">
+		<image src="../../../images/background-white.png"></image>
+		<text style="color: #666;">暂时没有其他信息哦~</text>
+	</view>
+</view>
+
+	<view class='btn' bindtap='complie'>{{configuerInfo}}</view>

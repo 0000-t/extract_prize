@@ -8,6 +8,14 @@
 	<text>{{item.prize}}</text>
 </view>
 </block>
-<view class="loading">
+<view wx:if="{{Info}}"  class="loading">
 	<image hidden="{{end}}" src='/images/loading.gif'></image>{{bottomText}}
+</view>
+
+<view wx:else>
+		<view style="display:flex;flex-direction:column;align-items:center;margin-top: 100rpx;">
+	<image src="../../../images/background-white.png"></image>
+	<text style="color: #666;">暂时没有其他信息哦~</text>
+</view>
+
 </view>

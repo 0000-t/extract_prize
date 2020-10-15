@@ -1,5 +1,6 @@
 // miniprogram/pages/account/account.js
 var getPriceInfo = require("../../util/priceUtils");
+const priceUtils = require("../../util/priceUtils");
 Page({
   /* content:
         "activityPriceId": 0,
@@ -29,6 +30,7 @@ Page({
     end: true,
     bottomText: "正在加载下一页",
     Info: [],
+    isShow: false
   },
 
   clickTicket(e) {
@@ -49,39 +51,89 @@ Page({
     })
   },
 
-  TabChanges(e) {
+
+  /**
+   * 关闭弹窗
+   */
+  closeDialog() {
     this.setData({
-      type: e.detail.name
+      isShow: false
     })
+  },
+
+  /**
+   * 显示弹窗
+   */
+  showDialog() {
+    if (this.data.account <= 0) {
+      return void wx.showToast({
+        title: '当前无可提现余额',
+        icon: 'none'
+      })
+    }
+    this.setData({
+      isShow: true
+    })
+  },
+
+  /**
+   * 获取用户输入的金额
+   * @param {*} e 
+   */
+  getMoney(e) {
+    let money = e.detail.money
+    console.log(money)
+    this.applyOfCash(money)
   },
 
   /**
    * 申请提现
    */
-  applyOfCash() {
+  applyOfCash(money) {
     wx.showLoading({
       title: '提现中, 请稍等',
     })
-    getPriceInfo.applyOfCash()
+    getPriceInfo.applyOfCash(money)
       .then(res => {
+        console.log(res)
         wx.hideLoading()
-        wx.showToast({
-          title: '提现成功'
-        })
+        this.closeDialog()
+        if (res.success) {
+          wx.showToast({
+            title: '提现成功'
+          })
+        }
+        throw res
       })
       .catch(err => {
         wx.hideLoading()
         wx.showToast({
           title: '提现失败，请稍后再试',
+          icon: 'none'
         })
       })
 
+  },
+
+  /**
+   * 获取账户的余额
+   */
+  getAccount() {
+    priceUtils.getAcount()
+      .then(res => {
+        // console.log(res)
+        this.setData({
+          account: res.data.account
+        })
+      })
+      .catch(err => console.log('获取账户余额失败', err))
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getAccount()
     if (!wx.getStorageSync('userInfo')) {
       wx.navigateBack({
         delta: 1,
@@ -99,14 +151,68 @@ Page({
       getPriceInfo.getMyPrice().then(res => {
         this.setData({ Info: res.data })
         console.log(res)
+        res.data.forEach((value, index) => {
+          switch (value.priceType) {
+            case "实物":
+              this.setData({ shop: true }); break;
+            case "券码":
+              this.setData({ quan: true }); break;
+            default: break;
+          }
+        })
       }).catch(err => {
         console.error("失败");
       })
     }
   },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+
+  TabChanges(e) {
+    this.setData({
+      type: e.detail.name
+    })
+  },
+  changes(e) {
+    console.log(e);
+    wx.navigateTo({
+      url: `../me/address/address?restart=1`,
+    })
+  },
+  onShow: function () {
+    var pages = getCurrentPages();
+    var currpages = pages[pages.length - 1]
+    if (currpages.data.address) {
+      let province = address.address.split("省")[0];
+      this.setData({
+        address,
+      })
+      let changes = 0;
+      //对地址进行处理
+      for (let i in provinces) {
+        if (province == provinces[i].name) {
+          changes = 1;
+          break;
+        }
+      }
+      if (changes) {
+        //判断省内或者省外
+        if (province == "广东") {
+          //付钱 （微信支付方式）
+        } else {
+          //弹出相关窗口（微信二维码）
+        }
+        //收费或者是弹出一个小窗口
+      } else {
+        wx.showToast({
+          title: '地址无效请更换地址信息~',
+          icon: "none",
+          duration: 2000,
+        })
+      }
+
+    } else {
+      return;
+    }
+  },
   onReachBottom: function () {
 
   },
