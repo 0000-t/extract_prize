@@ -1,3 +1,5 @@
+import serverAddress from './serverAddress.js'
+
 /**
  * 
  * @description 关于微信支付的相关内容

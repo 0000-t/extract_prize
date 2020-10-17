@@ -1,6 +1,7 @@
 <block wx:if="{{Info}}" wx:for="{{Info}}" wx:for-item="item" wx:key="item">
-	<view class="container">
-		<radio-group bindchange="radioChange">
+	<block wx:if="{{!makesure}}">
+
+		<view class="container">
 			<!-- <view>
         <image src="/images/house.png" class="image-style"></image>
       </view> -->
@@ -16,12 +17,31 @@
 			<view wx:if="{{!makesure}}" bindtap="delete" data-id="{{item.id}}" class="border-style">
 				<text style="color: red">删除</text>
 			</view>
-			<view>
-				<radio wx:if="{{makesure}}" value="{{item.id}}"></radio>
+		</view>
+
+	</block>
+
+	<block wx:else>
+		<radio-group bindchange="radioChange">
+			<view class="container">
+				<view>
+					<view class="">
+						<!-- 姓名 手机号 -->
+						<text>{{item.name}}</text>
+						<text style="margin-left:15rpx; font-size:26rpx;color:#9d9d9d">{{item.phone}}</text>
+					</view>
+					<text>{{item.address}}</text>
+				</view>
+				<view>
+					<radio wx:if="{{makesure}}" checked="{{index == currentClick}}" value="{{index}}"></radio>
+				</view>
 			</view>
 		</radio-group>
-	</view>
+	</block>
+
 </block>
+
+<view wx:if="{{makesure}}" catchtap="add_address" class="add_address">添加地址</view>
 
 <view wx:if="{{!Info}}">
 	<view style="display:flex;flex-direction:column;align-items:center;margin-top: 100rpx;">
@@ -30,4 +50,4 @@
 	</view>
 </view>
 
-	<view class='btn' bindtap='complie'>{{configuerInfo}}</view>
+<view class='btn' bindtap='complie'>{{configuerInfo}}</view>

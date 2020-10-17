@@ -1,3 +1,5 @@
+import serverAddress from './util/serverAddress.js'
+
 const User = require("./util/UserUtils.js");
 //app.js
 App({
@@ -47,7 +49,7 @@ App({
             header: {
               "Content-Type": "application/x-www-form-urlencoded"
             },
-            url: 'http://47.94.135.125:6081/luckly/wx/openId',
+            url: serverAddress + '/wx/openId',
             data: {
               code: res.code
             },

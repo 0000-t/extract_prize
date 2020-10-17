@@ -16,7 +16,7 @@ Component({
 
     src: {
       type: String,
-    }
+    },
   },
 
   /**

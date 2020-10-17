@@ -11,7 +11,7 @@
     wx:key="item"
   >
     <image 
-      src="{{ item }}"
+      src="{{ item.url }}"
       mode="{{ mode }}"
       alt="图片"
       show-menu-by-longpress="true"

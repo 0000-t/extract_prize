@@ -1,3 +1,5 @@
+import serverAddress from './serverAddress.js'
+
 /**
  * 
  * @description 与服务器连接的js文件，与奖品相关的东西
@@ -14,7 +16,7 @@
 function getPriceInfo(page, rows) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/raffle/queryByUser',
+      url: serverAddress + '/raffle/queryByUser',
       method: "GET",
       data: {
         "userId": getApp().globalData.openid,
@@ -36,7 +38,7 @@ function getPriceInfo(page, rows) {
 function getMyPrice() {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/prize/getPrizeByOpenId',
+      url: serverAddress + '/prize/getPrizeByOpenId',
       method: "GET",
       data: {
         "opendId": getApp().globalData.openid
@@ -58,7 +60,7 @@ function applyOfCash(money) {
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      url: 'http://47.94.135.125:6081/luckly//wx/transfer',
+      url: serverAddress + '/wx/transfer',
       method: 'POST',
       data: {
         openId: getApp().globalData.openid,
@@ -76,7 +78,7 @@ function applyOfCash(money) {
 function getAcount() {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/user/' + getApp().globalData.openid,
+      url: serverAddress + '/user/' + getApp().globalData.openid,
       success: resolve,
       fail: reject
     })

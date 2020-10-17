@@ -1,3 +1,4 @@
+import serverAddress from '../../util/serverAddress.js'
 //获取应用实例
 const app = getApp().globalData
 
@@ -85,8 +86,9 @@ Page({
    * 发送增加抽奖次数请求
    */
   addAwardCount() {
+    console.log('调用接口')
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/wx/share?openId=' + app.openid,
+      url: serverAddress + '/wx/share?openId=' + app.openid,
       success: res => {
         console.log('添加次数成功', res, app.openid)
       },
@@ -104,7 +106,7 @@ Page({
   getVideoByPathAndRows(vPath, vRows) {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: `http://47.94.135.125:6081/luckly/advertise/pageVedio?page=${vPath}&rows=${vRows}`,
+        url: `${serverAddress}/advertise/pageVedio?page=${vPath}&rows=${vRows}`,
         success: res => {
           //1..将数据添加到videoData的尾部
           const items = res.data.items;
@@ -113,6 +115,7 @@ Page({
           this.setData({
             videoData: this.data.videoData
           })
+          console.log(items)
           //判断数据库中是否还有数据
           full = videoPath == res.data.totalPage && true, 
           

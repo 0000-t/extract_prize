@@ -5,7 +5,7 @@
 				提现
 			</view>
 			<view class="content"	>
-				<input type="number" bindinput="inputContent" placeholder="{{ placeholder }}"></input>
+				<input type="digit" bindinput="inputContent" placeholder="{{ placeholder }}"></input>
 			</view>
 			<view class="btn">
 				<view class="btn_cancel"

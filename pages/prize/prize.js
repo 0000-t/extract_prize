@@ -1,6 +1,6 @@
 // miniprogram/pages/account/account.js
-var getPriceInfo = require("../../util/priceUtils");
 const priceUtils = require("../../util/priceUtils");
+
 Page({
   /* content:
         "activityPriceId": 0,
@@ -30,15 +30,35 @@ Page({
     end: true,
     bottomText: "正在加载下一页",
     Info: [],
-    isShow: false
+    isShow: false,
+    shop: false,
+    quan: false,
   },
 
   clickTicket(e) {
-    let src = e.currentTarget.dataset.src;
-    console.log('展示券码')
-    // wx.previewImage({
-    //   urls: [src],
-    // })
+    let index = +e.currentTarget.dataset.index;
+    let priceType = +this.data.Info[index].priceType
+    // let priceType=3
+    let status = this.data.Info[index].status
+    console.log('展示券码', e)
+    //判断状态
+    if (status == 0) {
+      //判断类型
+      if (priceType == 2) {
+        wx.previewImage({
+          urls: [this.data.Info[index].url],
+        })
+      } else if (priceType == 3) {
+        console.log(e);
+        wx.navigateTo({
+          url: `../me/address/address?restart=1`,
+        })
+      }
+    } else {
+      wx.showToast({
+        title: status == 1 ? '商品已领取' : '商品已过期',
+      })
+    }
   },
 
   setElemHeight() {
@@ -93,7 +113,7 @@ Page({
     wx.showLoading({
       title: '提现中, 请稍等',
     })
-    getPriceInfo.applyOfCash(money)
+    priceUtils.applyOfCash(money)
       .then(res => {
         console.log(res)
         wx.hideLoading()
@@ -102,8 +122,9 @@ Page({
           wx.showToast({
             title: '提现成功'
           })
+        } else {
+          throw res
         }
-        throw res
       })
       .catch(err => {
         wx.hideLoading()
@@ -145,22 +166,26 @@ Page({
           })
         }
       })
-
     } else {
+      wx.showLoading({
+        title: '加载中',
+      })
       this.setElemHeight();
-      getPriceInfo.getMyPrice().then(res => {
+      priceUtils.getMyPrice().then(res => {
         this.setData({ Info: res.data })
         console.log(res)
-        res.data.forEach((value, index) => {
-          switch (value.priceType) {
-            case "实物":
-              this.setData({ shop: true }); break;
-            case "券码":
-              this.setData({ quan: true }); break;
-            default: break;
-          }
-        })
+        // res.data.forEach((value, index) => {
+        //   switch (value.priceType) {
+        //     case '2':
+        //       this.setData({ shop: true }); break;
+        //     case '1':
+        //       this.setData({ quan: true }); break;
+        //     default: break;
+        //   }
+        // })
+        wx.hideLoading()
       }).catch(err => {
+        wx.hideLoading()
         console.error("失败");
       })
     }
@@ -171,47 +196,50 @@ Page({
       type: e.detail.name
     })
   },
+
   changes(e) {
     console.log(e);
     wx.navigateTo({
       url: `../me/address/address?restart=1`,
     })
   },
-  onShow: function () {
-    var pages = getCurrentPages();
-    var currpages = pages[pages.length - 1]
-    if (currpages.data.address) {
-      let province = address.address.split("省")[0];
-      this.setData({
-        address,
-      })
-      let changes = 0;
-      //对地址进行处理
-      for (let i in provinces) {
-        if (province == provinces[i].name) {
-          changes = 1;
-          break;
-        }
-      }
-      if (changes) {
-        //判断省内或者省外
-        if (province == "广东") {
-          //付钱 （微信支付方式）
-        } else {
-          //弹出相关窗口（微信二维码）
-        }
-        //收费或者是弹出一个小窗口
-      } else {
-        wx.showToast({
-          title: '地址无效请更换地址信息~',
-          icon: "none",
-          duration: 2000,
-        })
-      }
 
-    } else {
-      return;
-    }
+  onShow: function () {
+    // var pages = getCurrentPages();
+    // var currpages = pages[pages.length - 1]
+    // if (currpages.data.address) {
+    //   let province = address.address.split("省")[0];
+    //   this.setData({
+    //     address,
+    //   })
+    //   let changes = 0;
+    //   //对地址进行处理
+    //   for (let i in provinces) {
+    //     if (province == provinces[i].name) {
+    //       changes = 1;
+    //       break;
+    //     }
+    //   }
+    //   if (changes) {
+    //     //判断省内或者省外
+    //     if (province == "广东") {
+    //       //付钱 （微信支付方式）
+    //     } else {
+    //       //弹出相关窗口（微信二维码）
+    //     }
+    //     //收费或者是弹出一个小窗口
+    //   } else {
+    //     wx.showToast({
+    //       title: '地址无效请更换地址信息~',
+    //       icon: "none",
+    //       duration: 2000,
+    //     })
+    //   }
+
+    // } else {
+    //   return;
+    // }
+
   },
   onReachBottom: function () {
 

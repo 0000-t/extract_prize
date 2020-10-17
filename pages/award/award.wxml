@@ -4,6 +4,7 @@
 <view class="container">
    <mySwiper 
       imgUrl="{{ imgUrl }}"
+      bind:clickImg="clickImg"
    >
    </mySwiper>
 
@@ -12,7 +13,11 @@
          awardsConfig="{{ awards }}"
          num="{{ award_num }}"
          prohibit="{{ prohibit }}"
+         is-reset="{{ isReset }}"
+         zhuan="{{ zhuan }}"
+         bind:zhuan="zhuan"
          bind:myAwards="click" 
+         bind:percentageNull="percentageNull"
       ></myAward>
       <view class="compass_award_num">
          <!-- <button class="start">start</button> -->

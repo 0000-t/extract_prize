@@ -11,6 +11,7 @@ Page({
     page: 1,
     total: 1,
     bottomText: "已经到底啦~",
+    Info: []
   },
 
   /**

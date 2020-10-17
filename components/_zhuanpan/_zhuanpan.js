@@ -18,7 +18,7 @@ Component({
     */
    properties: {
       percentage: {
-         type: Boolean, // 概率开关，默认随机 false
+         type: Boolean, // 概率开关，默认随机 true
          value: true
       },
 
@@ -50,6 +50,17 @@ Component({
          }
       },
 
+      zhuan: {
+         type: Boolean,
+         value: false,
+         observer(newValue) {
+            console.log(newValue)
+            newValue && setTimeout(() => {
+               this._zhuan()
+            }, 0)
+         }
+      },
+
       // 限制：最多17个选项， 单个选项最多填10-13个字, 选项名称最多21个字
       awardsConfig: { // 默认的当前转盘选项 
          type: Array,
@@ -62,11 +73,10 @@ Component({
          ],
          observer(newValue) {
             const colors = ['#F5C956', '#F5A721']
-            const len = newValue.length;
-            for (let i = 0; i < len; i++) {
-               newValue[i].color = i % 2 == 0 ? colors[0] : colors[1];
-               if (newValue[i].count <= 0) newValue[i].percentage = 0
-            }
+            newValue.forEach((item, index) => {
+               item.color = index % 2 == 0 ? colors[0] : colors[1];
+               if (item.count <= 0) item.percentage = 0
+            })
             console.log(newValue)
             this.initAdards();
          }
@@ -76,6 +86,14 @@ Component({
          type: Number,
          value: 0,
       },
+
+      isReset: {
+         type: Boolean,
+         value: false,
+         observer(isOk) {
+            isOk && this.reset()
+         }
+      }
 
    },
 
@@ -186,11 +204,17 @@ Component({
       },
 
 
+      tao_go() {
+         this.triggerEvent('zhuan')
+      },
+
+
       /*
       * 内部私有方法建议以下划线开头
       * triggerEvent 用于触发事件,过triggerEvent来给父组件传递信息的
       * 写法： this.triggerEvent('cancelEvent', { num: 1 })  // 可以将num通过参数的形式传递给父组件
       */
+
 
       // GO转盘开始转动
       _zhuan() {
@@ -214,16 +238,13 @@ Component({
             //开启概率 percentage这属性必须要传个ture
             if (that.data.percentage) {
                r = +that._openpercentage();
-               console.log(r)
+               console.log(r != r && r <= 0)
             }
          }
 
-         if (r <= 0 && r != r) {
-            console.log('抽奖概率为零了')
-            return void wx.showToast({
-               title: '抽奖活动暂停，请稍后再试',
-               icon: 'none'
-            })
+         if (r != r || r <= 0) {
+            //概率为0
+            return void that.triggerEvent('percentageNull')
          }
 
          console.log('当前答案选项的下标==', r);

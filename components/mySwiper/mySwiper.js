@@ -27,10 +27,11 @@ Component({
     scanImg(e) {
       let idx = +e.currentTarget.dataset.index;
       wx.previewImage({
-        urls: [this.data.imgUrl[idx]],
+        urls: [this.data.imgUrl[idx].url],
       }).then(res => {
-        console.log(res)
+        // console.log(res)
       })
+      this.triggerEvent('clickImg', {id: this.data.imgUrl[idx].id})
     }
   }
 })

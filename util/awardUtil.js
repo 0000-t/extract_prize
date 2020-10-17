@@ -1,12 +1,24 @@
+import serverAddress from './serverAddress.js'
+
 /**
  * 获取广告图片
  */
 function getImg() {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/advertise/Context',
+      url: serverAddress + '/advertise/Context',
       success: res => resolve(res),
       fail: err => reject(err)
+    })
+  })
+}
+
+function clickImg(id) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: serverAddress + '/advertise/click/' + id,
+      success: resolve,
+      fail: reject
     })
   })
 }
@@ -17,7 +29,7 @@ function getImg() {
 function getAwards() {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/raffle/raffleItem',
+      url: serverAddress + '/raffle/raffleItem',
       success: res => resolve(res),
       fail: err => reject(err)
     })
@@ -31,7 +43,7 @@ function getAwards() {
 function clickAcquire(id) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/raffle/click/' + id,
+      url: serverAddress + '/raffle/click/' + id,
       success: res => resolve(res),
       fail: err => reject(err)
     })
@@ -49,7 +61,7 @@ function addRaffle(id, openid) {
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      url: 'http://47.94.135.125:6081/luckly/raffle/addRaffle',
+      url: serverAddress + '/raffle/addRaffle',
       method: 'POST',
       data: {
         activityPriceId: id,
@@ -65,7 +77,8 @@ module.exports = {
   getImg,
   getAwards,
   clickAcquire,
-  addRaffle
+  addRaffle,
+  clickImg
 }
 
 

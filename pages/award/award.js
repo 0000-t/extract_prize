@@ -12,6 +12,57 @@ Page({
     tabActive: 0,
     showDialog: false,
     prohibit: false,  //是否开启抽奖
+    zhuan: false,
+  },
+
+
+  clickImg(e) {
+    let id = e.detail.id
+    awardUtil.clickImg(id)
+      .then(res => {
+        console.log('点击图片广告+1')
+      })
+      .catch(err => { })
+  },
+
+  zhuan() {
+    if (this.data.award_num > 0) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      awardUtil.getAwards()
+        .then(res => {
+          wx.hideLoading()
+          this.setData({
+            awards: res.data,
+            zhuan: true,
+          })
+        })
+    } else {
+      wx.showModal({
+        cancelColor: 'cancelColor',
+        confirmText: '去观看',
+        confirmColor: '#3399FF',
+        title: '您的抽奖机会用完了',
+        content: '观看15秒广告，即可获得抽奖机会哟',
+        success: res => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../advertise/advertise',
+            })
+          }
+        }
+      })
+    }
+  },
+
+  percentageNull() {
+    wx.hideLoading()
+    this.setData({ zhuan: false })
+    wx.showToast({
+      title: '暂停抽奖，请稍后再试',
+      icon: 'none'
+    })
   },
 
   /**
@@ -26,7 +77,8 @@ Page({
         myAward: e.detail.s_awards,
         award_num: --this.data.award_num,
         [`awards[${idx}].count`]: --this.data.awards[idx].count,
-        showDialog: true
+        showDialog: true,
+        zhuan: false
       })
     } else {
       wx.showModal({
@@ -51,9 +103,13 @@ Page({
    */
   closeDialog() {
     this.setData({
-      showDialog: false
+      showDialog: false,
+      isReset: true
     })
-
+    //自动重置转盘
+    setTimeout(() => {
+      this.setData({ isReset: false })
+    }, 300)
   },
 
   /**
@@ -61,6 +117,10 @@ Page({
    */
   getAward() {
     this.closeDialog()  //关闭弹窗
+
+    // this.setData({
+    //   isReset: true
+    // })
 
     wx.showLoading({
       title: '领取中',

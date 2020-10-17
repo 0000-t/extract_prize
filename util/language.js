@@ -87,4 +87,4 @@ var getChina = strs => {
   return '';
 }
 
-module.exports = {getChina}
+module.exports = {getChina,province2}

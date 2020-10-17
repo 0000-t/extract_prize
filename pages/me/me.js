@@ -25,7 +25,7 @@ Page({
           avatarUrl: userinfo.avatarUrl,
           controller: false,
           name: userinfo.nickName,
-          exit:true,
+          exit: true,
         });
         wx.setStorage({
           data: userinfo,
@@ -48,31 +48,35 @@ Page({
         name: userinfo.nickName,
         controller: false,
         avatarUrl: userinfo.avatarUrl,
-        exit:true
+        exit: true
       })
     }
   },
-  exitToLogin(e){
+
+  /**
+   * 退出登录
+   * @param {*} e 
+   */
+  exitToLogin(e) {
     //清除缓存
-    wx.removeStorage({
-      key: 'userInfo',
-      success:res=>{
-        wx.showModal({
-          title:"正在退出登录",
-          content:"您确定要退出登录吗~",
-          success:res=>{
-            if(res.confirm){
+    wx.showModal({
+      title: "正在退出登录",
+      content: "您确定要退出登录吗~",
+      success: res => {
+        if (res.confirm) {
+          wx.removeStorage({
+            key: 'userInfo',
+            success: res => {
               this.setData({
-                avatarUrl:"./../../images/man-top.png",
-                controller:true,
-                exit:false,
+                avatarUrl: "./../../images/man-top.png",
+                controller: true,
+                exit: false,
               })
-            } else{
-              return ;
             }
-          }
-        })
-        
+          })
+        } else {
+          return;
+        }
       }
     })
     console.log("tuichu");

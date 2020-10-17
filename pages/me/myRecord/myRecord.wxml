@@ -1,6 +1,6 @@
 <!--miniprogram/pages/me/myRecord/myRecord.wxml-->
 <view class="emppty"></view>
-<block wx:for="{{Info}}">
+<block wx:for="{{Info}}" wx:key="item">
 <view class="container">
 	<text style="color:red;padding-right:20rpx">时间:</text>
 	<text>{{item.createTime}}</text>

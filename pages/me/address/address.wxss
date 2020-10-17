@@ -38,3 +38,13 @@
 .border-style text{
   padding-left: 25rpx;
 }
+
+.add_address {
+  width: 30%;
+  background-color: #1296db;
+  padding: 20rpx 30rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  margin: 50rpx auto;
+  color: white;
+}

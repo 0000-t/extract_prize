@@ -6,7 +6,7 @@
                 id="{{item.id}}"
                 maxlength='{{item.max}}' 
                 type='{{item.type}}'
-                placeholder="{{item.value ? '' : '未填写'}}"
+                placeholder="{{item.value ? '' : (index == 2 ? '请输入省市+详细地址' : '请输入')}}"
                 value='{{item.value}}' 
                 disabled="{{inputD}}"
                 bindfocus="bindfocus"

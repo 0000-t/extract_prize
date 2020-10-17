@@ -1,3 +1,5 @@
+import serverAddress from './serverAddress.js'
+
 /**
  * 
  * @description 与服务器连接的js文件，与用户相关的东西
@@ -14,7 +16,7 @@
 function sendOpenidtoServers(nickName,Openid) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/user',
+      url: serverAddress + '/user',
       method: "POST",
       data: {
         "createTime": "2020-09-16T14:54:20.056Z",
@@ -35,7 +37,7 @@ function sendOpenidtoServers(nickName,Openid) {
 function getUserInfo(Openid) {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'http://47.94.135.125:6081/luckly/user/' + Openid,
+      url: serverAddress + '/user/' + Openid,
       method: "GET",
       dataType: "json",
       success: resolve,
