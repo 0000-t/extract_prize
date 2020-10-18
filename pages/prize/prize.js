@@ -44,11 +44,11 @@ Page({
     //判断状态
     if (status == 0) {
       //判断类型
-      if (priceType == 2) {
+      if (priceType == 3) {
         wx.previewImage({
           urls: [this.data.Info[index].url],
         })
-      } else if (priceType == 3) {
+      } else if (priceType == 2) {
         console.log(e);
         wx.navigateTo({
           url: `../me/address/address?restart=1`,

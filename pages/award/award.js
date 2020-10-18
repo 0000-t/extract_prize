@@ -3,6 +3,8 @@ const User = require("../../util/UserUtils.js");
 const awardUtil = require('../../util/awardUtil')
 let openid = getApp().globalData.openid;
 
+let idx;
+
 Page({
 
   /**
@@ -71,7 +73,7 @@ Page({
    */
   click(e) {
     if (this.data.award_num > 0) {
-      const idx = +e.detail.idx;
+      idx = +e.detail.idx;
       console.log(e.detail)
       this.setData({
         myAward: e.detail.s_awards,
@@ -106,6 +108,10 @@ Page({
       showDialog: false,
       isReset: true
     })
+    awardUtil.addRaffle(this.data.awards[idx].id, openid)
+      .then(res => {
+        console.log(res)
+      })
     //自动重置转盘
     setTimeout(() => {
       this.setData({ isReset: false })
