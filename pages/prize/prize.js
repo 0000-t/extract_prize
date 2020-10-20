@@ -85,14 +85,30 @@ Page({
    * 显示弹窗
    */
   showDialog() {
-    if (this.data.account <= 0) {
-      return void wx.showToast({
-        title: '当前无可提现余额',
-        icon: 'none'
-      })
-    }
-    this.setData({
-      isShow: true
+    // wx.showToast({
+    //   title: '改功能暂未开放',
+    //   icon: 'none'
+    // })
+    // if (this.data.account <= 0) {
+    //   return void wx.showToast({
+    //     title: '当前无可提现余额',
+    //     icon: 'none'
+    //   })
+    // }
+    // this.setData({
+    //   isShow: true
+    // })
+
+    wx.showModal({
+      cancelColor: 'cancelColor',
+      title: '联系客服回收',
+      content: "点击'确定'按钮扫码联系客服"
+    }).then(res => {
+      if (res.confirm) {
+        wx.previewImage({
+          urls: ['https://www.yinsuzhaopin.com/img/kf.jpg'],
+        })
+      }
     })
   },
 

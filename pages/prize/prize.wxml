@@ -1,9 +1,9 @@
 <view class="cash">
 	<view class="cash_content">
-		<view class="cash_title">可提现余额</view>
-		<view class="cash_num">￥{{ account || '0'}}</view>
+		<view class="cash_title">福利分</view>
+		<view class="cash_num">{{ account || '0'}}</view>
 	</view>
-	<view class="cash_btn" catchtap="showDialog">提现</view>
+	<view class="cash_btn" catchtap="showDialog">回收</view>
 </view>
 
 <!-- content -->
@@ -88,8 +88,9 @@
 		<view class="container">
 			<view class="stangle-style flex-style stangel">
 				<view class="flex-style stangel">
-					<view style="font-size:20rpx">￥</view>
-					<view style="font-size:40rpx;color:red">{{item.count}}</view>
+					<image style="width: 160rpx; height: 160rpx" mode="aspectFit" src="{{ item.url }}"></image>
+					<!-- <view style="font-size:20rpx">￥</view>
+					<view style="font-size:40rpx;color:red">{{item.count}}</view> -->
 				</view>
 			</view>
 			<view class="stangle-style-right flex-style stangelling">

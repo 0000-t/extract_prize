@@ -6,7 +6,7 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
-		"enhance": false,
+		"enhance": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
@@ -32,7 +32,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.13.0",
-	"appid": "wxa07c6def45213e73",
+	"appid": "wx3e1e91e71cdc028a",
 	"projectname": "%E6%8A%BD%E5%A5%96",
 	"debugOptions": {
 		"hidedInDevtools": []

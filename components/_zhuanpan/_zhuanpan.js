@@ -54,7 +54,6 @@ Component({
          type: Boolean,
          value: false,
          observer(newValue) {
-            console.log(newValue)
             newValue && setTimeout(() => {
                this._zhuan()
             }, 0)
@@ -238,11 +237,11 @@ Component({
             //开启概率 percentage这属性必须要传个ture
             if (that.data.percentage) {
                r = +that._openpercentage();
-               console.log(r != r && r <= 0)
+               console.log(r, r != r || r < 0)
             }
          }
 
-         if (r != r || r <= 0) {
+         if (r != r || r < 0) {
             //概率为0
             return void that.triggerEvent('percentageNull')
          }

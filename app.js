@@ -4,15 +4,15 @@ const User = require("./util/UserUtils.js");
 //app.js
 App({
   onLaunch: function () {
-    this.getUserAuthorize()
-    this.getUserOpenInfo()
-      .then(res => {
-        // console.log(res)
-        this.globalData.openid = res.data.openId
-      })
-      .catch(err => {
-        console.log(err)
-      })
+     this.getUserAuthorize()
+    // this.getUserOpenInfo()
+    //   .then(res => {
+    //     console.log(res)
+    //     this.globalData.openid = res.data.openId
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   },
 
   getUserAuthorize: function () {
@@ -45,15 +45,13 @@ App({
     return new Promise((resolve, reject) => {
       wx.login({
         success: res => {
+          let code = res.code;
           wx.request({
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            url: serverAddress + '/wx/openId',
+            url: 'https://www.yinsuzhaopin.com/luckly/wx/openId',
+            method: 'get',
             data: {
-              code: res.code
+              code
             },
-            method: 'POST',
             success: resolve,
             fail: reject
           })

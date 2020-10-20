@@ -27,48 +27,70 @@ Page({
       .catch(err => { })
   },
 
+  //启动转盘
   zhuan() {
     if (this.data.award_num > 0) {
       wx.showLoading({
         title: '加载中',
       })
-      awardUtil.getAwards()
+      //获取奖品项和抽奖次数
+      Promise.all([awardUtil.getAwards(), User.getUserInfo(openid)])
         .then(res => {
           wx.hideLoading()
           this.setData({
-            awards: res.data,
-            zhuan: true,
+            awards: res[0].data,
+            award_num: res[1].data.priceAccount
+          })
+          //抽奖次数大于0，转盘启动
+          if (res[1].data.priceAccount > 0) {
+            this.setData({
+              zhuan: true
+            })
+          } else {
+            this.thePriceNumIsNull()
+          }
+        })
+        .catch(err => {
+          wx.hideLoading()
+          wx.showModal({
+            cancelColor: 'cancelColor',
+            title: '加载失败, 请下拉刷新重试'
           })
         })
     } else {
-      wx.showModal({
-        cancelColor: 'cancelColor',
-        confirmText: '去观看',
-        confirmColor: '#3399FF',
-        title: '您的抽奖机会用完了',
-        content: '观看15秒广告，即可获得抽奖机会哟',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../advertise/advertise',
-            })
-          }
-        }
-      })
+      this.thePriceNumIsNull()
     }
   },
 
+  thePriceNumIsNull() {
+    wx.showModal({
+      cancelColor: 'cancelColor',
+      confirmText: '去观看',
+      confirmColor: '#3399FF',
+      title: '您的抽奖机会用完了',
+      content: '观看15秒广告，即可获得抽奖机会哟',
+      success: res => {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '../advertise/advertise',
+          })
+        }
+      }
+    })
+  },
+
+  //概率为0
   percentageNull() {
     wx.hideLoading()
     this.setData({ zhuan: false })
     wx.showToast({
-      title: '暂停抽奖，请稍后再试',
+      title: '抽奖人数过多，请稍等',
       icon: 'none'
     })
   },
 
   /**
-   * 点击 ‘go’，开始抽奖
+   * 得到抽奖项
    * @param {object} e 
    */
   click(e) {
@@ -82,6 +104,12 @@ Page({
         showDialog: true,
         zhuan: false
       })
+
+      //添加领取记录
+      awardUtil.addRaffle(this.data.awards[idx].id, openid)
+        .then(res => {
+          console.log(res)
+        })
     } else {
       wx.showModal({
         cancelColor: 'cancelColor',
@@ -108,10 +136,10 @@ Page({
       showDialog: false,
       isReset: true
     })
-    awardUtil.addRaffle(this.data.awards[idx].id, openid)
-      .then(res => {
-        console.log(res)
-      })
+    // awardUtil.addRaffle(this.data.awards[idx].id, openid)
+    //   .then(res => {
+    //     console.log(res)
+    //   })
     //自动重置转盘
     setTimeout(() => {
       this.setData({ isReset: false })
@@ -136,8 +164,6 @@ Page({
     //领取奖品
     awardUtil.clickAcquire(id)  //点击领取
       .then(res => {
-        return awardUtil.addRaffle(id, openid)   //添加领取记录
-      }).then(res => {
         wx.hideLoading()
       }).catch(err => {
         console.log('错误' + err)
@@ -235,6 +261,7 @@ Page({
     } else {
       getApp().getUserOpenInfo()
         .then(res => {
+          console.log(res);
           getApp().globalData.openid = res.data.openId
           openid = res.data.openId;
           console.log(getApp().globalData.openid)
