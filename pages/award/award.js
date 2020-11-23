@@ -29,36 +29,44 @@ Page({
 
   //启动转盘
   zhuan() {
-    if (this.data.award_num > 0) {
-      wx.showLoading({
-        title: '加载中',
-      })
-      //获取奖品项和抽奖次数
-      Promise.all([awardUtil.getAwards(), User.getUserInfo(openid)])
-        .then(res => {
-          wx.hideLoading()
-          this.setData({
-            awards: res[0].data,
-            award_num: res[1].data.priceAccount
-          })
-          //抽奖次数大于0，转盘启动
-          if (res[1].data.priceAccount > 0) {
+    if (wx.getStorageSync('userInfo')) {
+      if (this.data.award_num > 0) {
+        wx.showLoading({
+          title: '加载中',
+        })
+        //获取奖品项和抽奖次数
+        Promise.all([awardUtil.getAwards(), User.getUserInfo(openid)])
+          .then(res => {
+            wx.hideLoading()
             this.setData({
-              zhuan: true
+              awards: res[0].data,
+              award_num: res[1].data.priceAccount
             })
-          } else {
-            this.thePriceNumIsNull()
-          }
-        })
-        .catch(err => {
-          wx.hideLoading()
-          wx.showModal({
-            cancelColor: 'cancelColor',
-            title: '加载失败, 请下拉刷新重试'
+            console.log(res[1].data)
+            //抽奖次数大于0，转盘启动
+            if (res[1].data.priceAccount > 0) {
+              this.setData({
+                zhuan: true
+              })
+            } else {
+              this.thePriceNumIsNull()
+            }
           })
-        })
+          .catch(err => {
+            wx.hideLoading()
+            wx.showModal({
+              cancelColor: 'cancelColor',
+              title: '加载失败, 请下拉刷新重试'
+            })
+          })
+      } else {
+        this.thePriceNumIsNull()
+      }
     } else {
-      this.thePriceNumIsNull()
+      wx.showToast({
+        title: '请登录',
+        icon: 'none'
+      })
     }
   },
 
@@ -68,7 +76,7 @@ Page({
       confirmText: '去观看',
       confirmColor: '#3399FF',
       title: '您的抽奖机会用完了',
-      content: '观看15秒广告，即可获得抽奖机会哟',
+      content: '观看广告即可有机会参与抽奖',
       success: res => {
         if (res.confirm) {
           wx.navigateTo({
@@ -116,7 +124,7 @@ Page({
         confirmText: '去观看',
         confirmColor: '#3399FF',
         title: '您的抽奖机会用完了',
-        content: '观看15秒广告，即可获得抽奖机会哟',
+        content: '观看广告即可有机会参与抽奖',
         success: res => {
           if (res.confirm) {
             wx.navigateTo({
@@ -164,6 +172,11 @@ Page({
     //领取奖品
     awardUtil.clickAcquire(id)  //点击领取
       .then(res => {
+      //   return User.getUserInfo(openid)
+      // }).then(res => {
+      //   this.setData({
+      //     award_num: res.data.priceAccount
+      //   })
         wx.hideLoading()
       }).catch(err => {
         console.log('错误' + err)

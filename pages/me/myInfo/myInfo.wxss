@@ -23,3 +23,16 @@
 .text {
   line-height: 122rpx;
 }
+
+.cell_icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.btn-arrow {
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 10rpx;
+}

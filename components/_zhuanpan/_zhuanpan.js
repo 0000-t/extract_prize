@@ -336,7 +336,7 @@ Component({
                confirmText: '去观看',
                confirmColor: '#3399FF',
                title: '您的抽奖机会用完了',
-               content: '观看15秒视频，即可获得抽奖机会哟',
+               content: '观看广告即可有机会参与抽奖',
                success: res => {
                   if (res.confirm) {
                      wx.navigateTo({

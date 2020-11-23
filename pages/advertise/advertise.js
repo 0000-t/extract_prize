@@ -22,10 +22,10 @@ Page({
     this.setData({
       changeIndex: current_num
     })
-    if (!full && current_num >= this.data.video.length - 2) {
-      this.getVideoByPathAndRows(++videoPath, 5)
-      console.log('刷新了')
-    }
+    // if (!full && current_num >= this.data.video.length - 2) {
+    //   this.getVideoByPathAndRows(++videoPath, 5)
+    //   console.log('刷新了')
+    // }
   },
 
   /**
@@ -98,29 +98,29 @@ Page({
     })
   },
 
+  //增加播放量
+  clickAdvertise(e) {
+    console.log(e)
+    wx.request({
+      url: serverAddress + '/advertise/click/' + e.target.id,
+      success: res => {
+        console.log('播放量+1', res)
+      }
+    })
+  },
+
   /**
-   * @param {Number} vpath 页码
-   * @param {Number} vrows 每页的数量
    * @return {Promise} 返回一个promise对象
    */
-  getVideoByPathAndRows(vPath, vRows) {
+  getVideoByPathAndRows() {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: `${serverAddress}/advertise/pageVedio?page=${vPath}&rows=${vRows}`,
+        url: `${serverAddress}/advertise/VedioContext`,
         success: res => {
-          //1..将数据添加到videoData的尾部
-          const items = res.data.items;
-          this.data.videoData.push(...items)
-          //3.渲染到页面
+          console.log(res)
           this.setData({
-            videoData: this.data.videoData
+            videoData: res.data
           })
-          console.log(items)
-          //判断数据库中是否还有数据
-          full = videoPath == res.data.totalPage && true, 
-          
-          //4.成功回调
-          resolve(items)
         },
         fail(err) {
           //失败回调
@@ -133,11 +133,8 @@ Page({
   init(callback) {
     //1.向服务器请求数据
     //2.将数据写入缓存
-    videoPath = videoCount = 0;
-    this.data.videoData = []
-    this.getVideoByPathAndRows(++videoPath, 5).then(videoData => {
+    this.getVideoByPathAndRows().then(videoData => {
       //写入缓存
-      this.setStorageOfVideoData(videoData)  
       //关闭刷新
       callback && callback()
     }).catch(err => {
@@ -152,8 +149,6 @@ Page({
 
   onLoad: function (options) {
     this.getSystemInfo()
-    //1.在缓存中获取数据
-    this.getVideoDataInStorage()
 
     this.init()
   },
@@ -193,11 +188,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    //1.判断数据库是否还有数据
-    if (this.data.full) return
-
-    //2.向服务器请求数据并添加到页面中
-    this.getVideoByPathAndRows(++videoPath, 5)
+    
   },
 
   /**

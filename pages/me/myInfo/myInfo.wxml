@@ -28,6 +28,10 @@
 <navigator url="../address/address">
 	<view class="inner-view">
 		<text class="text">我的地址</text>
-		<text class="text2"></text>
+		<image 
+			class="cell_icon btn-arrow" 
+			src="../../../images/click.png"
+	></image>
+		<!-- <text class="text2">></text> -->
 	</view>
 </navigator>

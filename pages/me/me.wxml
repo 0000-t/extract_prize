@@ -16,7 +16,7 @@
 		<myCell icon="/images/price.png" title="我的奖品" url="/pages/prize/prize" />
 		<myCell icon="/images/my-info.png" title="我的信息" url="/pages/me/myInfo/myInfo" />
 		<myCell icon="/images/log.png" title="我的记录" url="/pages/me/myRecord/myRecord" />
-		<myCell icon="/images/address.png" title="我的地址" url="/pages/me/address/address" />
+		<!-- <myCell icon="/images/address.png" title="我的地址" url="/pages/me/address/address" /> -->
 	
 		<view wx:if ="{{exit}}" class="cell" bindtap="exitToLogin">
 			<image class="cell_icon" src="/images/exit.png"></image>

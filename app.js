@@ -47,7 +47,7 @@ App({
         success: res => {
           let code = res.code;
           wx.request({
-            url: 'https://www.yinsuzhaopin.com/luckly/wx/openId',
+            url: serverAddress + '/wx/openId',
             method: 'get',
             data: {
               code
