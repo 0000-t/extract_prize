@@ -37,6 +37,7 @@ Page({
         //获取奖品项和抽奖次数
         Promise.all([awardUtil.getAwards(), User.getUserInfo(openid)])
           .then(res => {
+            console.log(res)
             wx.hideLoading()
             this.setData({
               awards: res[0].data,
@@ -222,6 +223,7 @@ Page({
   init(callback) {
     Promise.all([awardUtil.getAwards(), awardUtil.getImg(), User.getUserInfo(openid)])
       .then(res => {
+        console.log(res)
         this.setData({
           prohibit: true,    //开启抽奖
           awards: res[0].data,
@@ -258,6 +260,7 @@ Page({
    */
   onLoad: function (options) {
     //从缓存中获取数据
+    console.log(111)
     this.getDataByStorage()
   },
 
@@ -268,10 +271,12 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
+    
     //从数据库获取数据
     if (openid) {
       this.init()
     } else {
+      console.log(1)
       getApp().getUserOpenInfo()
         .then(res => {
           console.log(res);
@@ -279,7 +284,7 @@ Page({
           openid = res.data.openId;
           console.log(getApp().globalData.openid)
           this.init()
-        })
+        }).catch(err => console.log(err))
     }
   },
 
